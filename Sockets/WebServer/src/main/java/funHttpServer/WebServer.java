@@ -200,11 +200,12 @@ class WebServer {
           // extract path parameters
           query_pairs = splitQuery(request.replace("multiply?", ""));
 		
-	  if (query_pairs.get("num1").class != Integer.class || query_pairs.get("num2").class != Integer.class) {
+	  if (query_pairs.get("num1") != null || query_pairs.get("num2") != null) {
+		  if (query_pairs.get("num1").getClass() != int.getClass() || query_pairs.get("num2").getClass() != int.getClass()) {
 		builder.append("HTTP/1.1 400 Bad Request\n");
 		builder.append("Content-Type: text/html; charset=utf-8\n");
 		builder.append("\n");
-		builder.append("Both parameters must be integers.");
+		builder.append("Both parameters must be integers.");}
 	  } else {
           // extract required fields from parameters
           Integer num1 = Integer.parseInt(query_pairs.get("num1"));
