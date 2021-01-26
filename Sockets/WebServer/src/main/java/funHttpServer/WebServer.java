@@ -199,17 +199,18 @@ class WebServer {
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           // extract path parameters
           query_pairs = splitQuery(request.replace("multiply?", ""));
-
+		
+	  if (query_pairs.get("num1").getClass() != Integer.class || query_pairs.get("num2").getClass() != Integer.class) {
+		builder.append("HTTP/1.1 400 Bad Request\n");
+		builder.append("Content-Type: text/html; charset=utf-8\n");
+		builder.append("\n");
+		builder.append("Both parameters must be integers.");
+	  } else {
           // extract required fields from parameters
           Integer num1 = Integer.parseInt(query_pairs.get("num1"));
           Integer num2 = Integer.parseInt(query_pairs.get("num2"));
 
-		if ((num1.getClass() != Integer.class) || (num2.getClass() != Integer.class)) {
-			builder.append("HTTP/1.1 400 Bad Request\n");
-			builder.append("Content-Type: text/html; charset=utf-8\n");
-			builder.append("\n");
-			builder.append("Both parameters must be integers.");
-		} else {
+	
 
 	          // do math
         	  Integer result = num1 * num2;
@@ -218,8 +219,8 @@ class WebServer {
         	  builder.append("HTTP/1.1 200 OK\n");
 	          builder.append("Content-Type: text/html; charset=utf-8\n");
         	  builder.append("\n");
-	          builder.append("Result is: " + result);
-		}
+		  builder.append("Result is: " + result);
+		
         } else if (request.contains("github?")) {
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
