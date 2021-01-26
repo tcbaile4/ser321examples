@@ -205,12 +205,18 @@ class WebServer {
 		builder.append("HTTP/1.1 400 Bad Request\n");
 		builder.append("Content-Type: text/html; charset=utf-8\n");
 		builder.append("\n");
-		builder.append("Both parameters must be integers.");
+		builder.append("Use parameters num1 and num2.");
 	  } else {
+		  try {
           // extract required fields from parameters
           Integer num1 = Integer.parseInt(query_pairs.get("num1"));
           Integer num2 = Integer.parseInt(query_pairs.get("num2"));
-
+		  } catch (Exception e) {
+			  builder.append("HTTP/1.1 400 Bad Request\n");
+			  builder.append("Content-Type: text/html; charset=utf-8\n");
+			  builder.append("\n");
+			  builder.append("Parameters must be integers.");
+		  }
 	
 
 	          // do math
