@@ -248,15 +248,13 @@ class WebServer {
 	 // JSONObject j = (JSONObject) parser.parse(json);
 
 	  JSONArray j = new JSONArray(json);
-	  JSONArray name = j.getJSONArray("name");
-	  JSONArray owner = j.getJSONArray("owner");
 
-	  for (int i = 0; i < name.length(); i++) {
-		  System.out.println(name.getJSONObject(i).toString()
+	  for (int i = 0; i < j.length(); i++) {
+		  System.out.println(j.getJSONObject(i).getString("name")
 				  + ", " +
-				  owner.getJSONObject(i).getString("id")
+				  j.getJSONObject(i).getString("owner").getString("login")
 				  + " -> " +
-				  owner.getJSONObject(i).getString("login"));
+				  j.getJSONObject(i).getString("owner").getString("id");
 	  }	
 
           builder.append("Check the todos mentioned in the Java source file");
