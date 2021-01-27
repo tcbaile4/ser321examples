@@ -252,9 +252,9 @@ class WebServer {
 	  for (int i = 0; i < j.length(); i++) {
 		  System.out.println(j.getJSONObject(i).getString("name")
 				  + ", " +
-				  j.getJSONObject(i).getString("owner","login")
+				  j.getJSONObject(i).getJsonObject("owner").getString("login")
 				  + " -> " +
-				  j.getJSONObject(i).getString("owner","id"));
+				  j.getJSONObject(i).getJsonObject("owner").getString("id");
 	  }	
 
           builder.append("Check the todos mentioned in the Java source file");
