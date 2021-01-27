@@ -254,7 +254,7 @@ class WebServer {
 				  + ", " +
 				  j.getJSONObject(i).getJsonObject("owner").getString("login")
 				  + " -> " +
-				  j.getJSONObject(i).getJsonObject("owner").getString("id");
+				  j.getJSONObject(i).getJsonObject("owner").getString("id"));
 	  }	
 
           builder.append("Check the todos mentioned in the Java source file");
