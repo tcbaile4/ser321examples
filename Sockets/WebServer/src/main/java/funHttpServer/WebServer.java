@@ -247,7 +247,7 @@ class WebServer {
 	 // JSONParser parser = new JSONParser();
 	 // JSONObject j = (JSONObject) parser.parse(json);
 
-	  JSONObject j = new JSONObject(json);
+	  JSONArray j = new JSONArray(json);
 	  JSONArray name = j.getJSONArray("name");
 	  JSONArray owner = j.getJSONArray("owner");
 
