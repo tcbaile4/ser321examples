@@ -246,8 +246,16 @@ class WebServer {
           JSONParser parser = new JSONParser();
 	  JSONObject j = (JSONObject) parser.parse(json);
 
-	  System.out.println(j);
-	
+	  JSONArray name = j.getJSONArray("name");
+	  JSONArray owner = j.getJSONArray("owner");
+
+	  for (int i = 0; i < name.length(); i++) {
+		  System.out.println(name.getJSONObject(i).toString()
+				  + ", " +
+				  owner.getJSONObject(i).getString("id")
+				  + " -> " +
+				  owner.getJSONObject(i).getString("login"));
+	  }	
 
           builder.append("Check the todos mentioned in the Java source file");
           // TODO: Parse the JSON returned by your fetch and create an appropriate
