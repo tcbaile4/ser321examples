@@ -248,16 +248,21 @@ class WebServer {
 	 // JSONObject j = (JSONObject) parser.parse(json);
 
 	  JSONArray j = new JSONArray(json);
+	  String output = "";
 
 	  for (int i = 0; i < j.length(); i++) {
-		  System.out.println(j.getJSONObject(i).getJSONObject("owner").getString("login")
+		  output += (j.getJSONObject(i).getJSONObject("owner").getString("login")
 				  + ", " +
 				  j.getJSONObject(i).getJSONObject("owner").getNumber("id")
   				  + " -> " +
 				  j.getJSONObject(i).getString("name"));
+		  output += "\n";
 	  }	
 
-          builder.append("Check the todos mentioned in the Java source file");
+          builder.append("HTTP/1.1 200 OK\n");
+	  builder.append("Content-Type: text/html; charset=utf-8\n");
+	  builder.append("\n");
+	  builder.append(output);
           // TODO: Parse the JSON returned by your fetch and create an appropriate
           // response
           // and list the owner name, owner id and name of the public repo on your webpage, e.g.
